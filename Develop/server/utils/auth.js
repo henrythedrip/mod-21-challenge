@@ -50,16 +50,18 @@ module.exports = {
       code: "UNAUTHENTICATED",
     },
   }),
-  authMiddleware: function ({ req, res }) {
+  authMiddleware: function ({ req }) {
+    // console.log("Query: " + req.query);
+    // console.log("Headers: " + req.headers);
     let token = req.query.token || req.headers.authorization;
 
     // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
       token = token.split(" ").pop().trim();
     }
-
+    console.log("Token Found: " + token);
     if (!token) {
-      return res;
+      return req;
     }
 
     // verify token and get user data out of it
@@ -68,10 +70,10 @@ module.exports = {
       req.user = data;
 
       console.log(req.user);
-      return res;
+      return req;
     } catch {
       console.log("Invalid token");
-      return res;
+      return req;
     }
   },
   signToken: function ({ email, name, _id }) {

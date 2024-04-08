@@ -26,6 +26,7 @@ input BookInput {
 
     type Query {
         getSingleUser(username: String!):User
+        me: User
     }
 
     type Return {

@@ -11,19 +11,27 @@ import { deleteBook } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { getMe } from '../utils/queries';
 import { removeBookId } from '../utils/localStorage';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { SaveBook } from '../utils/mutations';
 import { saveBook } from '../utils/API';
 
 const SavedBooks = () => {
-  const [userData, setUserData] = useState({
-    savedBooks: []
-  });
+  /* const [userData, setUserData] = useState({
+     savedBooks: []
+   });
+   */
 
+  const { loading, data, error } = useQuery(getMe);
+  console.log("loading: ", loading);
+  console.log("data: ", data);
+  console.log("error: ", error);
+
+  const userData = data?.me || {};
   // use this to determine if `useEffect()` hook needs to run again
   // const userDataLength = Object.keys(userData).length;
 
-  useEffect(() => {
+  /*
+    useEffect(() => {
     const getUserData = async () => {
       try {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -59,6 +67,7 @@ const SavedBooks = () => {
 
     getUserData();
   }, []);
+  */
   // }, [userDataLength]);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -89,6 +98,9 @@ const SavedBooks = () => {
   // if (!userData.length) {
   //   return <h2>LOADING...</h2>;
   // }
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
 
   return (
     <>
