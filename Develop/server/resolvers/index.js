@@ -45,27 +45,27 @@ module.exports = {
 
             return { token, user };
         },
-        saveBook: async (parent, { bookData }, context) => {
+        saveBook: async (parent, { authors, description, bookId, image, link, title }, context) => {
             console.log(authors);
-            console.log(bookData);
-            // console.log(body);
-            // console.log(user);
-            // console.log(context.user);
-            // console.log(context);
+            console.log(description);
+            console.log(bookId);
+            console.log(image);
+            console.log(link);
+            console.log(title);
             if (!context.user) {
                 throw new GraphQLError('You need to be logged in!');
             }
-            console.log(user);
+            // console.log(user);
             try {
                 const updatedUser = await User.findByIdAndUpdate(
                     // { _id: user },
                     context.user._id,
-                    { $addToSet: { savedBooks: bookData } },
+                    { $addToSet: { savedBooks: { authors, description, bookId, image, link, title } } },
                     { new: true, runValidators: true }
                 ).populate('savedBooks');;
                 return updatedUser;
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 return new GraphQLError(err.message);
             }
         },
