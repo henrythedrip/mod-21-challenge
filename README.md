@@ -29,7 +29,8 @@ To run the refactored application locally, follow these steps:
 Clone the repository.
 Install dependencies using npm install.
 Set up environment variables as per the provided example.
-Start the development server with npm start.
+Start the development server with `npm run start`
+I also recommend using `npm run develop` if you clone the repo
 
 ## Usage
 
@@ -42,11 +43,9 @@ Here are the sources that were used to build the project:
 
 [Deployment](https://coding-boot-camp.github.io/full-stack/mongodb/deploy-with-render-and-mongodb-atlas)
 
-[]()
+[Middleware](https://graphql.org/graphql-js/authentication-and-express-middleware/)
 
-[]()
-
-[]()
+[GraphQL](https://graphql.org/)
 
 ## License
 
