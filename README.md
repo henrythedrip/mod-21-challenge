@@ -22,6 +22,8 @@ MongoDB: NoSQL database for data storage.
 Apollo Server: Implementation of GraphQL server.
 Render: Platform for deploying web applications.
 
+![Screenshot of app](./Develop/client/src/assets/screenshot.png)
+
 ## Installation
 
 To run the refactored application locally, follow these steps:
