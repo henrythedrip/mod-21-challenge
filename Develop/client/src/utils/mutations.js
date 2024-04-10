@@ -75,4 +75,25 @@ const removeBook = gql`
       }
     }
   }
-`;
+`
+
+export const makeUser = gql`
+mutation makeUser($username: String!, $password: String!, $email: String!) {
+  makeUser(username: $username, password: $password, email: $email) {
+    user {
+      _id
+      username
+      password
+      email
+      savedBooks {
+        authors
+        description
+        bookId
+        image
+        link
+        title
+      }
+    }
+    token
+  }
+}`

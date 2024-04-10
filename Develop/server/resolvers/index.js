@@ -1,6 +1,6 @@
 const { User } = require('../models');
 
-const { signToken } = require('../utils/auth');
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const { GraphQLError } = require('graphql');
 
@@ -17,12 +17,13 @@ module.exports = {
             if (context.user) {
                 return await User.findOne({ _id: context.user._id }).populate('savedBooks');
             }
-            throw new AuthenticationError('You need to be logged in!');
+            throw AuthenticationError;
         },
     },
     Mutation: {
-        addUser: async (parent, args) => {
-            const user = await User.create(args);
+        makeUser: async (parent, { username, email, password }) => {
+            const user = await User.create({ username, email, password });
+            console.log('user', user)
             const token = signToken(user);
             return { token, user };
         },
@@ -55,17 +56,17 @@ module.exports = {
             if (!context.user) {
                 throw new GraphQLError('You need to be logged in!');
             }
-            // console.log(user);
+
             try {
                 const updatedUser = await User.findByIdAndUpdate(
-                    // { _id: user },
+
                     context.user._id,
                     { $addToSet: { savedBooks: { authors, description, bookId, image, link, title } } },
                     { new: true, runValidators: true }
                 ).populate('savedBooks');;
                 return updatedUser;
             } catch (err) {
-                // console.log(err);
+
                 return new GraphQLError(err.message);
             }
         },

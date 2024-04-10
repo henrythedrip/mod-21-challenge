@@ -36,7 +36,7 @@ input BookInput {
     }
 
     type Mutation {
-        addUser(username: String!, password: String!, email: String!): User
+        makeUser(username: String!, password: String!, email: String!): Return
         saveBook(user: ID, authors: [String], description: String, bookId: String, image: String, link: String, title: String): User
         deleteBook(bookId: String): User
         login(email: String!, password: String!): Return
