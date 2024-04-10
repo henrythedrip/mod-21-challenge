@@ -70,15 +70,18 @@ module.exports = {
             }
         },
         // remove a book from `savedBooks`
-        deleteBook: async (parent, { user, bookId }, context) => {
+        deleteBook: async (parent, { bookId }, context) => {
             if (!context.user) {
                 throw new GraphQLError('You need to be logged in!');
             }
+            console.log('context.user', context.user._id)
             const updatedUser = await User.findOneAndUpdate(
-                { _id: user },
+                { _id: context.user._id },
                 { $pull: { savedBooks: { bookId: bookId } } },
                 { new: true }
             );
+            console.log('bookId', bookId)
+            console.log('updatedUser', updatedUser);
             if (!updatedUser) {
                 return GraphQLError(err.message)
             }

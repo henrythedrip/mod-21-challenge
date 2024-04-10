@@ -52,8 +52,8 @@ mutation saveBook($user: ID, $authors: [String], $description: String, $bookId: 
 // `
 
 export const deleteBook = gql`
-mutation deleteBook($authors: [String], $description: String, $bookId: String, $image: String, $link: String, $title: String) {
-  deleteBook(authors: $authors, description: $description, bookId: $bookId, image: $image, link: $link, title: $title) {
+mutation deleteBook($bookId: String) {
+  deleteBook(bookId: $bookId) {
     savedBooks {
       authors
       description
