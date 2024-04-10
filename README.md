@@ -33,15 +33,14 @@ Start the development server with npm start.
 
 ## Usage
 
-Here is a video walk through guide of the program and how it works:
-
-[Link to video walk thru]()
+You can access the deployed site here
+[Link to the depolyed site](https://mod-21-challenge2.onrender.com/)
 
 ## Sources
 
 Here are the sources that were used to build the project:
 
-[]()
+[Deployment](https://coding-boot-camp.github.io/full-stack/mongodb/deploy-with-render-and-mongodb-atlas)
 
 []()
 
